@@ -21,43 +21,113 @@ Desarrollar progresivamente un sistema que permita registrar y consultar las pri
 - Registro de pagos.
 - Control de cochera.
 - Registro de servicios adicionales.
-- Cálculo de ingresos diarios.
 - Reportes de ingresos.
 - Dashboard de ocupación.
 - Historial de operaciones.
 
-## Tecnologías
+## Funcionalidad implementada
 
-El proyecto utilizará progresivamente las siguientes tecnologías:
+- Aplicación de consola para calcular ingresos diarios.
+- Registro de habitaciones simples y dobles vendidas.
+- Registro de ingresos por cochera.
+- Registro de gastos del día.
+- Cálculo del ingreso total.
+- Cálculo de la utilidad estimada.
 
-- Python para los primeros ejercicios de lógica de programación.
-- C# y .NET para el desarrollo del sistema.
+## Tecnologías utilizadas
+
+- C# para la lógica de la aplicación.
+- .NET para crear, compilar y ejecutar el proyecto.
 - Visual Studio Code como editor de código.
 - Git para el control de versiones.
 - GitHub para almacenar y publicar los avances.
-- Base de datos para guardar la información del hospedaje.
 
+## Tecnologías planificadas
+
+- Base de datos para almacenar habitaciones, clientes, pagos y operaciones.
+- ASP.NET Core para desarrollar servicios y aplicaciones web.
+- Tecnologías de interfaz para crear un dashboard de gestión.
+
+## Primer módulo completado: Ingreso Diario del Hospedaje
+
+Aplicación de consola desarrollada en C# para calcular los ingresos y la utilidad estimada de un día de trabajo en el hospedaje.
+
+### Datos de entrada
+
+El programa solicita:
+
+- Cantidad de habitaciones simples vendidas.
+- Precio por habitación simple.
+- Cantidad de habitaciones dobles vendidas.
+- Precio por habitación doble.
+- Cantidad de cocheras utilizadas.
+- Precio por cochera.
+- Gastos del día.
+
+### Cálculos realizados
+
+El programa calcula:
+
+- Ingreso por habitaciones.
+- Ingreso por cochera.
+- Ingreso total del día.
+- Gastos registrados.
+- Utilidad estimada.
+
+### Conceptos practicados
+
+- Variables.
+- Tipos de datos `int` y `decimal`.
+- Entrada de datos con `Console.ReadLine()`.
+- Salida de información con `Console.Write()` y `Console.WriteLine()`.
+- Conversión de texto con `int.Parse()` y `decimal.Parse()`.
+- Operaciones de suma, resta y multiplicación.
+- Interpolación de cadenas.
+- Formato de valores monetarios con dos decimales.
+
+### Ejecución
+
+Desde la carpeta del proyecto:
+
+```bash
+cd IngresoDiarioHospedaje
+dotnet run
+```
+### Estructura actual
+
+```text
+sistema-hospedaje/
+├── IngresoDiarioHospedaje/
+│   ├── Program.cs
+│   └── IngresoDiarioHospedaje.csproj
+└── README.md
+```
 ## Etapas del proyecto
 
-1. Desarrollo de ejercicios básicos de programación.
-2. Cálculo de ingresos diarios.
-3. Registro de habitaciones y clientes.
-4. Registro de pagos y cochera.
-5. Implementación de una base de datos.
-6. Creación de reportes.
-7. Desarrollo de una interfaz gráfica.
-8. Construcción de un sistema completo de gestión.
+1. ✅ Desarrollo de ejercicios básicos de programación.
+2. ✅ Cálculo de ingresos diarios.
+3. ⏳ Registro de habitaciones y clientes.
+4. ⏳ Registro de pagos y cochera.
+5. ⏳ Implementación de una base de datos.
+6. ⏳ Creación de reportes.
+7. ⏳ Desarrollo de una interfaz gráfica.
+8. ⏳ Construcción de un sistema completo de gestión.
 
 ## Estado actual
 
-Proyecto en etapa inicial.
+Primera aplicación de consola completada y funcionando.
 
-Actualmente se está trabajando en:
+Avances realizados:
 
-- Configuración del entorno de desarrollo.
-- Instalación de Git, Visual Studio Code y .NET.
-- Creación del repositorio.
-- Desarrollo de los primeros ejercicios de programación.
+- Entorno de desarrollo configurado.
+- Repositorio creado en GitHub.
+- Git y GitHub configurados.
+- Proyecto de consola creado con C# y .NET.
+- Entrada de datos desde la consola.
+- Cálculo de ingresos y utilidad diaria.
+- Presentación de resultados monetarios.
+
+El proyecto continuará creciendo de manera progresiva conforme se desarrollen nuevos conocimientos de programación, bases de datos y desarrollo web.
 
 ## Autor
 
