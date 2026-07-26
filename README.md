@@ -27,12 +27,26 @@ Desarrollar progresivamente un sistema que permita registrar y consultar las pri
 
 ## Funcionalidad implementada
 
-- Aplicación de consola para calcular ingresos diarios.
-- Registro de habitaciones simples y dobles vendidas.
+### Cálculo de ingreso diario
+
+- Registro de cantidades y precios de habitaciones simples y dobles.
 - Registro de ingresos por cochera.
 - Registro de gastos del día.
+- Cálculo del ingreso por habitaciones.
 - Cálculo del ingreso total.
 - Cálculo de la utilidad estimada.
+
+### Menú inicial del sistema
+
+- Menú principal con cuatro opciones.
+- Registro temporal de habitaciones.
+- Selección del tipo de habitación.
+- Registro del precio y estado de la habitación.
+- Registro de ingresos económicos mediante concepto y monto.
+- Resumen de habitaciones e ingresos registrados.
+- Cálculo del monto total acumulado.
+- Validación básica de datos ingresados.
+- Salida controlada del programa.
 
 ## Tecnologías utilizadas
 
@@ -93,6 +107,73 @@ Desde la carpeta del proyecto:
 cd IngresoDiarioHospedaje
 dotnet run
 ```
+
+## Segundo módulo completado: Menú Inicial del Sistema
+
+Aplicación de consola desarrollada en C# para realizar operaciones básicas del hospedaje mediante un menú repetitivo.
+
+### Opciones del menú
+
+1. Registrar una habitación.
+2. Registrar un ingreso económico.
+3. Ver un resumen básico.
+4. Salir del programa.
+
+### Datos de la habitación
+
+El programa permite registrar:
+
+- Número de habitación.
+- Tipo de habitación.
+- Precio por noche.
+- Estado disponible u ocupada.
+
+### Datos del ingreso
+
+El programa permite registrar:
+
+- Concepto del ingreso.
+- Monto recibido.
+
+### Resumen básico
+
+El sistema muestra:
+
+- Cantidad de habitaciones registradas.
+- Información de cada habitación.
+- Cantidad de ingresos registrados.
+- Información de cada ingreso.
+- Monto total acumulado.
+
+### Conceptos practicados
+
+- Menús mediante `switch`.
+- Repetición del programa mediante `while`.
+- Listas temporales con `List<string>`.
+- Validación de números con `TryParse()`.
+- Condiciones con `if` y `else`.
+- Operadores lógicos.
+- Conteo de elementos mediante `Count`.
+- Recorrido de listas mediante `foreach`.
+- Acumulación de montos.
+- Uso de `break` y `continue`.
+
+### Limitaciones actuales
+
+- Los datos se conservan solamente mientras el programa permanece abierto.
+- Al cerrar la aplicación, las listas se vacían.
+- Todavía no se utiliza una base de datos.
+- Todavía no se registran clientes, fechas de ingreso o fechas de salida.
+
+### Ejecución
+
+Desde la carpeta principal del repositorio:
+
+```bash
+cd RegistroHabitacion
+dotnet run
+```
+
 ### Estructura actual
 
 ```text
@@ -100,34 +181,42 @@ sistema-hospedaje/
 ├── IngresoDiarioHospedaje/
 │   ├── Program.cs
 │   └── IngresoDiarioHospedaje.csproj
+├── RegistroHabitacion/
+│   ├── Program.cs
+│   └── RegistroHabitacion.csproj
+├── .gitignore
 └── README.md
 ```
 ## Etapas del proyecto
 
 1. ✅ Desarrollo de ejercicios básicos de programación.
 2. ✅ Cálculo de ingresos diarios.
-3. ⏳ Registro de habitaciones y clientes.
-4. ⏳ Registro de pagos y cochera.
-5. ⏳ Implementación de una base de datos.
-6. ⏳ Creación de reportes.
-7. ⏳ Desarrollo de una interfaz gráfica.
-8. ⏳ Construcción de un sistema completo de gestión.
+3. ✅ Menú inicial y registro temporal de habitaciones.
+4. ✅ Registro temporal de ingresos económicos.
+5. ⏳ Registro de clientes, entradas y salidas.
+6. ⏳ Implementación de una base de datos.
+7. ⏳ Creación de reportes.
+8. ⏳ Desarrollo de una interfaz.
+9. ⏳ Construcción de un sistema completo de gestión.
 
 ## Estado actual
 
-Primera aplicación de consola completada y funcionando.
+Dos aplicaciones de consola completadas y funcionando.
 
 Avances realizados:
 
 - Entorno de desarrollo configurado.
-- Repositorio creado en GitHub.
-- Git y GitHub configurados.
-- Proyecto de consola creado con C# y .NET.
-- Entrada de datos desde la consola.
-- Cálculo de ingresos y utilidad diaria.
-- Presentación de resultados monetarios.
+- Repositorio creado y publicado en GitHub.
+- Primera aplicación para calcular ingresos y utilidad diaria.
+- Menú principal repetitivo con cuatro opciones.
+- Registro temporal de habitaciones.
+- Registro temporal de ingresos económicos.
+- Validación básica de datos mediante `TryParse()`.
+- Almacenamiento temporal mediante `List<string>`.
+- Resumen de habitaciones e ingresos registrados.
+- Cálculo del total de ingresos acumulados.
 
-El proyecto continuará creciendo de manera progresiva conforme se desarrollen nuevos conocimientos de programación, bases de datos y desarrollo web.
+Actualmente, la información se almacena únicamente durante la ejecución del programa. El siguiente crecimiento del proyecto incorporará una estructura más organizada y, posteriormente, almacenamiento permanente.
 
 ## Autor
 
