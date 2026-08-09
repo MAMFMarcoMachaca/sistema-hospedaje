@@ -218,6 +218,35 @@ Avances realizados:
 
 Actualmente, la información se almacena únicamente durante la ejecución del programa. El siguiente crecimiento del proyecto incorporará una estructura más organizada y, posteriormente, almacenamiento permanente.
 
+## Sprint 06–14 de agosto de 2026
+
+### Objetivo
+
+Revisar, ejecutar, probar y documentar los módulos actuales del proyecto para fortalecer el repositorio como evidencia de portafolio.
+
+### Tareas completadas
+
+- [x] Revisar el repositorio local.
+- [x] Verificar la instalación de .NET SDK.
+- [x] Compilar `IngresoDiarioHospedaje`.
+- [x] Compilar `RegistroHabitacion`.
+- [x] Ejecutar ambos proyectos.
+- [x] Probar entradas válidas e inválidas.
+- [x] Crear un checklist de pruebas.
+- [x] Documentar errores y soluciones.
+- [x] Practicar validaciones básicas y QA manual.
+
+### Pendientes
+
+- [ ] Corregir detalles menores de presentación.
+- [ ] Separar parte de la lógica en métodos.
+- [ ] Evitar habitaciones duplicadas.
+- [ ] Preparar el siguiente módulo del sistema.
+
+### Resultado del sprint
+
+Los dos proyectos de consola compilan y se ejecutan correctamente. Se realizaron pruebas funcionales, se documentaron errores y se dejó una base organizada para continuar el desarrollo.
+
 ## Autor
 
 Marco Antonio Machaca
