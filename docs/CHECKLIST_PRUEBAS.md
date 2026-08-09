@@ -2,49 +2,49 @@
 
 ## Proyecto: IngresoDiarioHospedaje
 
-- [ ] El proyecto compila sin errores.
-- [ ] El programa solicita todos los datos.
-- [ ] Calcula correctamente el ingreso por habitaciones.
-- [ ] Calcula correctamente el ingreso por cochera.
-- [ ] Calcula correctamente el ingreso total.
-- [ ] Resta correctamente los gastos.
-- [ ] Muestra correctamente la utilidad estimada.
+- [x] El proyecto compila sin errores.
+- [x] El programa solicita todos los datos.
+- [x] Calcula correctamente el ingreso por habitaciones.
+- [x] Calcula correctamente el ingreso por cochera.
+- [x] Calcula correctamente el ingreso total.
+- [x] Resta correctamente los gastos.
+- [x] Muestra correctamente la utilidad estimada.
 
 ## Proyecto: RegistroHabitacion
 
 ### Menú principal
 
-- [ ] El menú muestra cuatro opciones.
-- [ ] Una opción no numérica muestra un error.
-- [ ] Una opción fuera del rango muestra un error.
-- [ ] La opción 4 finaliza el programa.
+- [x] El menú muestra cuatro opciones.
+- [x] Una opción no numérica muestra un error.
+- [x] Una opción fuera del rango muestra un error.
+- [x] La opción 4 finaliza el programa.
 
 ### Registro de habitación
 
-- [ ] Acepta un número de habitación válido.
-- [ ] Rechaza números negativos o cero.
-- [ ] Rechaza texto en el número de habitación.
-- [ ] Permite seleccionar un tipo válido.
-- [ ] Rechaza tipos fuera del rango.
-- [ ] Acepta un precio mayor que cero.
-- [ ] Rechaza precios negativos o texto.
-- [ ] Permite elegir Disponible u Ocupada.
-- [ ] Guarda la habitación en la lista.
-- [ ] Aumenta correctamente el contador.
+- [x] Acepta un número de habitación válido.
+- [x] Rechaza números negativos o cero.
+- [x] Rechaza texto en el número de habitación.
+- [x] Permite seleccionar un tipo válido.
+- [x] Rechaza tipos fuera del rango.
+- [x] Acepta un precio mayor que cero.
+- [x] Rechaza precios negativos o texto.
+- [x] Permite elegir Disponible u Ocupada.
+- [x] Guarda la habitación en la lista.
+- [x] Aumenta correctamente el contador.
 
 ### Registro de ingreso
 
-- [ ] Acepta un concepto válido.
-- [ ] Rechaza un concepto vacío.
-- [ ] Acepta un monto mayor que cero.
-- [ ] Rechaza montos negativos o texto.
-- [ ] Guarda el ingreso en la lista.
-- [ ] Acumula correctamente el total.
+- [x] Acepta un concepto válido.
+- [x] Rechaza un concepto vacío.
+- [x] Acepta un monto mayor que cero.
+- [x] Rechaza montos negativos o texto.
+- [x] Guarda el ingreso en la lista.
+- [x] Acumula correctamente el total.
 
 ### Resumen
 
-- [ ] Funciona con las listas vacías.
-- [ ] Muestra todas las habitaciones.
-- [ ] Muestra todos los ingresos.
-- [ ] Muestra correctamente los contadores.
-- [ ] Muestra correctamente el monto total.
+- [x] Funciona con las listas vacías.
+- [x] Muestra todas las habitaciones.
+- [x] Muestra todos los ingresos.
+- [x] Muestra correctamente los contadores.
+- [x] Muestra correctamente el monto total.
