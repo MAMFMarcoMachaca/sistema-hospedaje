@@ -279,6 +279,8 @@ void RegistrarHabitacion(List<string> habitaciones)
         Console.WriteLine(
             "Error: el precio debe ser mayor que cero."
         );
+
+        return;
     }
 
     Console.WriteLine();
