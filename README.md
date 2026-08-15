@@ -1,252 +1,511 @@
 # Sistema de Gestión para Hospedaje
 
-Sistema desarrollado para mejorar el control de habitaciones, clientes, pagos, cochera, servicios adicionales e ingresos diarios de un hospedaje.
+Proyecto educativo desarrollado en C# y .NET para construir progresivamente un sistema de gestión aplicado a un hospedaje real.
+
+El objetivo es practicar desarrollo backend, bases de datos, QA, soporte de aplicaciones, análisis funcional, Git/GitHub y diseño de APIs utilizando un mismo proyecto como portafolio.
+
+---
 
 ## Problema que busca resolver
 
-Actualmente, muchas operaciones del hospedaje pueden registrarse manualmente en cuadernos, hojas separadas o mensajes, lo que puede provocar errores, pérdida de información y dificultades para conocer los ingresos reales del negocio.
+Muchas operaciones de un hospedaje pueden terminar registrándose en cuadernos, hojas separadas o mensajes, dificultando el control de:
 
-Este proyecto busca centralizar la información y facilitar el control diario del hospedaje.
-
-## Objetivo
-
-Desarrollar progresivamente un sistema que permita registrar y consultar las principales operaciones del hospedaje de manera ordenada, segura y sencilla.
-
-## Funciones planificadas
-
-- Registro de habitaciones.
-- Control de habitaciones disponibles y ocupadas.
-- Registro de clientes.
-- Registro de entradas y salidas.
-- Registro de pagos.
-- Control de cochera.
-- Registro de servicios adicionales.
-- Reportes de ingresos.
-- Dashboard de ocupación.
+- Habitaciones.
+- Clientes.
+- Ingresos.
+- Pagos.
+- Cochera.
+- Gastos.
+- Ocupación.
 - Historial de operaciones.
 
-## Funcionalidad implementada
+El proyecto busca centralizar progresivamente esta información en un sistema organizado.
 
-### Cálculo de ingreso diario
+---
 
-- Registro de cantidades y precios de habitaciones simples y dobles.
-- Registro de ingresos por cochera.
-- Registro de gastos del día.
-- Cálculo del ingreso por habitaciones.
-- Cálculo del ingreso total.
-- Cálculo de la utilidad estimada.
+# Estado actual
 
-### Menú inicial del sistema
+Actualmente el repositorio contiene:
 
-- Menú principal con cuatro opciones.
+- Dos aplicaciones de consola desarrolladas en C#.
 - Registro temporal de habitaciones.
-- Selección del tipo de habitación.
-- Registro del precio y estado de la habitación.
-- Registro de ingresos económicos mediante concepto y monto.
-- Resumen de habitaciones e ingresos registrados.
-- Cálculo del monto total acumulado.
-- Validación básica de datos ingresados.
-- Salida controlada del programa.
+- Registro temporal de ingresos.
+- Validaciones de datos mediante `TryParse()`.
+- Métodos separados para organizar la lógica.
+- Cálculo de ingresos y utilidad diaria.
+- Modelo SQL inicial.
+- Documentación de QA manual.
+- 10 casos de prueba funcionales.
+- Registro y seguimiento de una incidencia real.
+- Plantilla de incidencias para soporte de aplicaciones.
+- Diseño conceptual de una futura API REST.
+- Pruebas conceptuales para Postman.
 
-## Tecnologías utilizadas
+> La base de datos y la API todavía no están conectadas al programa. Actualmente forman parte del diseño y preparación para las siguientes etapas.
 
-- C# para la lógica de la aplicación.
-- .NET para crear, compilar y ejecutar el proyecto.
-- Visual Studio Code como editor de código.
-- Git para el control de versiones.
-- GitHub para almacenar y publicar los avances.
+---
 
-## Tecnologías planificadas
+# Funcionalidad implementada
 
-- Base de datos para almacenar habitaciones, clientes, pagos y operaciones.
-- ASP.NET Core para desarrollar servicios y aplicaciones web.
-- Tecnologías de interfaz para crear un dashboard de gestión.
+## 1. Ingreso Diario del Hospedaje
 
-## Primer módulo completado: Ingreso Diario del Hospedaje
+Aplicación de consola que permite registrar:
 
-Aplicación de consola desarrollada en C# para calcular los ingresos y la utilidad estimada de un día de trabajo en el hospedaje.
-
-### Datos de entrada
-
-El programa solicita:
-
-- Cantidad de habitaciones simples vendidas.
-- Precio por habitación simple.
-- Cantidad de habitaciones dobles vendidas.
-- Precio por habitación doble.
-- Cantidad de cocheras utilizadas.
-- Precio por cochera.
-- Gastos del día.
-
-### Cálculos realizados
+- Cantidad de habitaciones simples.
+- Precio de habitaciones simples.
+- Cantidad de habitaciones dobles.
+- Precio de habitaciones dobles.
+- Cantidad de cocheras.
+- Precio de cochera.
+- Gastos diarios.
 
 El programa calcula:
 
 - Ingreso por habitaciones.
 - Ingreso por cochera.
-- Ingreso total del día.
-- Gastos registrados.
+- Ingreso total.
+- Gastos.
 - Utilidad estimada.
 
-### Conceptos practicados
+---
 
-- Variables.
-- Tipos de datos `int` y `decimal`.
-- Entrada de datos con `Console.ReadLine()`.
-- Salida de información con `Console.Write()` y `Console.WriteLine()`.
-- Conversión de texto con `int.Parse()` y `decimal.Parse()`.
-- Operaciones de suma, resta y multiplicación.
-- Interpolación de cadenas.
-- Formato de valores monetarios con dos decimales.
+## 2. Registro de Habitaciones e Ingresos
 
-### Ejecución
+Aplicación de consola con menú principal:
 
-Desde la carpeta del proyecto:
+1. Registrar habitación.
+2. Registrar ingreso.
+3. Ver resumen.
+4. Salir.
 
-```bash
-cd IngresoDiarioHospedaje
-dotnet run
-```
+### Registro de habitación
 
-## Segundo módulo completado: Menú Inicial del Sistema
+Permite ingresar:
 
-Aplicación de consola desarrollada en C# para realizar operaciones básicas del hospedaje mediante un menú repetitivo.
-
-### Opciones del menú
-
-1. Registrar una habitación.
-2. Registrar un ingreso económico.
-3. Ver un resumen básico.
-4. Salir del programa.
-
-### Datos de la habitación
-
-El programa permite registrar:
-
-- Número de habitación.
-- Tipo de habitación.
+- Número.
+- Tipo.
 - Precio por noche.
-- Estado disponible u ocupada.
+- Estado.
 
-### Datos del ingreso
+Tipos disponibles:
 
-El programa permite registrar:
+- Simple.
+- Doble.
+- Matrimonial.
+- Familiar.
+- Triple.
 
-- Concepto del ingreso.
-- Monto recibido.
+Estados:
 
-### Resumen básico
+- Disponible.
+- Ocupada.
 
-El sistema muestra:
+### Registro de ingresos
 
-- Cantidad de habitaciones registradas.
-- Información de cada habitación.
-- Cantidad de ingresos registrados.
-- Información de cada ingreso.
-- Monto total acumulado.
+Permite registrar:
 
-### Conceptos practicados
+- Concepto.
+- Monto.
 
-- Menús mediante `switch`.
-- Repetición del programa mediante `while`.
-- Listas temporales con `List<string>`.
-- Validación de números con `TryParse()`.
-- Condiciones con `if` y `else`.
-- Operadores lógicos.
-- Conteo de elementos mediante `Count`.
-- Recorrido de listas mediante `foreach`.
-- Acumulación de montos.
-- Uso de `break` y `continue`.
+El sistema mantiene un monto acumulado durante la ejecución.
 
-### Limitaciones actuales
+---
 
-- Los datos se conservan solamente mientras el programa permanece abierto.
-- Al cerrar la aplicación, las listas se vacían.
-- Todavía no se utiliza una base de datos.
-- Todavía no se registran clientes, fechas de ingreso o fechas de salida.
+# Validaciones implementadas
 
-### Ejecución
+Actualmente se validan, entre otros casos:
 
-Desde la carpeta principal del repositorio:
+- Opciones no numéricas.
+- Opciones fuera del rango permitido.
+- Números de habitación menores o iguales a cero.
+- Precios no numéricos.
+- Precios menores o iguales a cero.
+- Conceptos de ingreso vacíos.
+- Montos de ingreso inválidos.
 
-```bash
-cd RegistroHabitacion
-dotnet run
+Se utiliza principalmente:
+
+```csharp
+int.TryParse(...)
+decimal.TryParse(...)
 ```
 
-### Estructura actual
+para evitar que entradas incorrectas interrumpan inesperadamente el programa.
+
+---
+
+# Organización del código
+
+Parte de la lógica del módulo `RegistroHabitacion` fue separada en métodos:
+
+```text
+RegistrarHabitacion()
+RegistrarIngreso()
+MostrarResumen()
+```
+
+Esto permite mantener el programa principal más organizado y facilita futuras mejoras.
+
+---
+
+# QA y pruebas
+
+El proyecto incluye documentación de pruebas funcionales manuales.
+
+Se diseñaron y ejecutaron:
+
+- **10 casos de prueba.**
+- **9 casos aprobados inicialmente.**
+- **1 caso fallido inicialmente.**
+- **1 defecto encontrado.**
+- **1 defecto corregido.**
+- **1 retest aprobado.**
+
+Durante las pruebas se encontró que el sistema podía continuar el registro de una habitación después de detectar un precio negativo.
+
+El defecto fue documentado, corregido y verificado nuevamente mediante un retest.
+
+Documentación relacionada:
+
+```text
+docs/CASOS_DE_PRUEBA.md
+docs/CHECKLIST_PRUEBAS.md
+docs/ERRORES_Y_PENDIENTES.md
+```
+
+---
+
+# Soporte de aplicaciones
+
+También se documentó un flujo básico de gestión de incidencias.
+
+El repositorio incluye:
+
+```text
+docs/PLANTILLA_INCIDENCIA.md
+docs/INC-001_PRECIO_NEGATIVO.md
+```
+
+La incidencia `INC-001` documenta:
+
+- Problema reportado.
+- Comportamiento esperado.
+- Comportamiento obtenido.
+- Pasos para reproducir.
+- Impacto.
+- Análisis.
+- Solución aplicada.
+- Retest.
+- Cierre.
+
+---
+
+# Modelo SQL inicial
+
+Se creó un modelo conceptual inicial en:
+
+```text
+database/modelo_inicial.sql
+```
+
+Incluye las tablas:
+
+- `Habitaciones`
+- `Clientes`
+- `Pagos`
+- `Cochera`
+- `Gastos`
+
+Se practicaron conceptos como:
+
+- `PRIMARY KEY`
+- `FOREIGN KEY`
+- `IDENTITY`
+- `NOT NULL`
+- `NULL`
+- `UNIQUE`
+- `CHECK`
+- `INT`
+- `NVARCHAR`
+- `DECIMAL`
+- `DATETIME`
+
+> Actualmente este modelo todavía no está conectado a las aplicaciones de consola.
+
+---
+
+# API REST futura
+
+Se diseñaron conceptualmente endpoints para una futura API.
+
+Ejemplos:
+
+```http
+GET /api/habitaciones
+POST /api/habitaciones
+PUT /api/habitaciones/{id}
+DELETE /api/habitaciones/{id}
+```
+
+También se propusieron endpoints para:
+
+- Clientes.
+- Pagos.
+- Cochera.
+- Reportes.
+
+La documentación se encuentra en:
+
+```text
+docs/API_FUTURA.md
+```
+
+La API todavía no está implementada.
+
+---
+
+# Postman conceptual
+
+Se prepararon casos conceptuales para futuras pruebas de la API mediante Postman.
+
+Ejemplos trabajados:
+
+```text
+GET  /api/habitaciones
+→ 200 OK
+```
+
+```text
+POST /api/habitaciones
+→ 201 Created
+```
+
+```text
+POST /api/habitaciones
+precio negativo
+→ 400 Bad Request
+```
+
+También se introdujeron conceptos básicos de:
+
+- HTTP.
+- GET.
+- POST.
+- Body.
+- JSON.
+- Códigos de estado HTTP.
+
+Documentación:
+
+```text
+docs/POSTMAN_CONCEPTUAL.md
+```
+
+---
+
+# Tecnologías utilizadas actualmente
+
+- C#
+- .NET
+- Visual Studio Code
+- Git
+- GitHub
+- Markdown
+
+---
+
+# Tecnologías y conceptos en preparación
+
+- SQL.
+- Bases de datos relacionales.
+- API REST.
+- HTTP.
+- JSON.
+- Postman.
+- ASP.NET Core.
+
+SQL, API REST y Postman se encuentran actualmente en una etapa conceptual o de diseño y todavía no forman parte de una integración funcional completa.
+
+---
+
+# Estructura actual
 
 ```text
 sistema-hospedaje/
+│
 ├── IngresoDiarioHospedaje/
 │   ├── Program.cs
 │   └── IngresoDiarioHospedaje.csproj
+│
 ├── RegistroHabitacion/
 │   ├── Program.cs
 │   └── RegistroHabitacion.csproj
+│
+├── database/
+│   └── modelo_inicial.sql
+│
+├── docs/
+│   ├── API_FUTURA.md
+│   ├── CASOS_DE_PRUEBA.md
+│   ├── CHECKLIST_PRUEBAS.md
+│   ├── ERRORES_Y_PENDIENTES.md
+│   ├── INC-001_PRECIO_NEGATIVO.md
+│   ├── PLANTILLA_INCIDENCIA.md
+│   └── POSTMAN_CONCEPTUAL.md
+│
 ├── .gitignore
 └── README.md
 ```
-## Etapas del proyecto
 
-1. ✅ Desarrollo de ejercicios básicos de programación.
+---
+
+# Ejecución
+
+## Ingreso Diario
+
+Desde la raíz del repositorio:
+
+```bash
+dotnet run --project .\IngresoDiarioHospedaje\IngresoDiarioHospedaje.csproj
+```
+
+## Registro de Habitaciones
+
+```bash
+dotnet run --project .\RegistroHabitacion\RegistroHabitacion.csproj
+```
+
+Para comprobar la compilación:
+
+```bash
+dotnet build
+```
+
+---
+
+# Conceptos practicados
+
+## C#
+
+- Variables.
+- `int`.
+- `decimal`.
+- Strings.
+- Condicionales.
+- `if` / `else`.
+- `switch`.
+- `while`.
+- `List<string>`.
+- `Add()`.
+- `Count`.
+- `foreach`.
+- Métodos.
+- Parámetros.
+- `return`.
+- `TryParse()`.
+- Interpolación de cadenas.
+
+## Git y GitHub
+
+- Repositorios.
+- Branches.
+- `git status`.
+- `git add`.
+- `git commit`.
+- `git push`.
+- `git pull`.
+- Pull Requests.
+- Merge.
+
+## QA
+
+- Casos de prueba.
+- Resultado esperado.
+- Resultado obtenido.
+- Pruebas positivas.
+- Pruebas negativas.
+- Defectos.
+- Reproducibilidad.
+- Retest.
+
+## Soporte de aplicaciones
+
+- Incidencias.
+- Severidad.
+- Prioridad.
+- Impacto.
+- Análisis inicial.
+- Workaround.
+- Escalamiento.
+- Resolución.
+- Cierre.
+
+---
+
+# Etapas del proyecto
+
+1. ✅ Fundamentos de C#.
 2. ✅ Cálculo de ingresos diarios.
-3. ✅ Menú inicial y registro temporal de habitaciones.
-4. ✅ Registro temporal de ingresos económicos.
-5. ⏳ Registro de clientes, entradas y salidas.
-6. ⏳ Implementación de una base de datos.
-7. ⏳ Creación de reportes.
-8. ⏳ Desarrollo de una interfaz.
-9. ⏳ Construcción de un sistema completo de gestión.
+3. ✅ Menú de consola.
+4. ✅ Registro temporal de habitaciones.
+5. ✅ Registro temporal de ingresos.
+6. ✅ Mejora de validaciones.
+7. ✅ Separación básica de lógica mediante métodos.
+8. ✅ QA manual y casos de prueba.
+9. ✅ Documentación de incidencias.
+10. ✅ Modelo SQL inicial.
+11. ✅ Diseño conceptual de API REST y Postman.
+12. ⏳ Registro de clientes.
+13. ⏳ Persistencia real en base de datos.
+14. ⏳ ASP.NET Core.
+15. ⏳ API REST funcional.
+16. ⏳ Pruebas reales con Postman.
+17. ⏳ Reportes.
+18. ⏳ Interfaz de usuario.
 
-## Estado actual
+---
 
-Dos aplicaciones de consola completadas y funcionando.
+# Sprint 06–14 de agosto de 2026
 
-Avances realizados:
+## Trabajo realizado
 
-- Entorno de desarrollo configurado.
-- Repositorio creado y publicado en GitHub.
-- Primera aplicación para calcular ingresos y utilidad diaria.
-- Menú principal repetitivo con cuatro opciones.
-- Registro temporal de habitaciones.
-- Registro temporal de ingresos económicos.
-- Validación básica de datos mediante `TryParse()`.
-- Almacenamiento temporal mediante `List<string>`.
-- Resumen de habitaciones e ingresos registrados.
-- Cálculo del total de ingresos acumulados.
-
-Actualmente, la información se almacena únicamente durante la ejecución del programa. El siguiente crecimiento del proyecto incorporará una estructura más organizada y, posteriormente, almacenamiento permanente.
-
-## Sprint 06–14 de agosto de 2026
-
-### Objetivo
-
-Revisar, ejecutar, probar y documentar los módulos actuales del proyecto para fortalecer el repositorio como evidencia de portafolio.
-
-### Tareas completadas
-
-- [x] Revisar el repositorio local.
-- [x] Verificar la instalación de .NET SDK.
-- [x] Compilar `IngresoDiarioHospedaje`.
-- [x] Compilar `RegistroHabitacion`.
-- [x] Ejecutar ambos proyectos.
+- [x] Revisar y ejecutar los proyectos existentes.
+- [x] Compilar ambos proyectos.
 - [x] Probar entradas válidas e inválidas.
-- [x] Crear un checklist de pruebas.
-- [x] Documentar errores y soluciones.
-- [x] Practicar validaciones básicas y QA manual.
+- [x] Mejorar validaciones.
+- [x] Separar lógica en métodos.
+- [x] Crear checklist de pruebas.
+- [x] Diseñar y ejecutar 10 casos de prueba.
+- [x] Detectar y documentar un defecto.
+- [x] Corregir el defecto.
+- [x] Realizar un retest.
+- [x] Crear plantilla de incidencia.
+- [x] Documentar una incidencia real.
+- [x] Crear modelo SQL inicial.
+- [x] Diseñar endpoints futuros.
+- [x] Documentar pruebas conceptuales de Postman.
 
-### Pendientes
+## Resultado del sprint
 
-- [ ] Corregir detalles menores de presentación.
-- [ ] Separar parte de la lógica en métodos.
-- [ ] Evitar habitaciones duplicadas.
-- [ ] Preparar el siguiente módulo del sistema.
+El proyecto pasó de contener únicamente ejercicios de consola a incorporar prácticas básicas de desarrollo, QA, soporte de aplicaciones, diseño de base de datos y arquitectura backend.
 
-### Resultado del sprint
+La siguiente etapa continuará desarrollando funcionalidades progresivamente sin perder el enfoque en comprensión, pruebas y documentación.
 
-Los dos proyectos de consola compilan y se ejecutan correctamente. Se realizaron pruebas funcionales, se documentaron errores y se dejó una base organizada para continuar el desarrollo.
+---
 
-## Autor
+# Limitaciones actuales
 
-Marco Antonio Machaca
+- Los datos de las aplicaciones de consola son temporales.
+- Los datos desaparecen al cerrar el programa.
+- La base de datos todavía no está conectada al código C#.
+- La API REST todavía no está implementada.
+- Los casos de Postman son conceptuales.
+- Todavía no existe una interfaz gráfica.
+
+---
+
+# Autor
+
+**Marco Antonio Machaca**
+
+Proyecto desarrollado como parte de un proceso progresivo de aprendizaje y construcción de portafolio en Ingeniería de Sistemas.
