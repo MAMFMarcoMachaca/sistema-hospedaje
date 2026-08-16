@@ -227,6 +227,16 @@ void RegistrarHabitacion(List<string> habitaciones)
         out int opcionTipo
     );
 
+    if(!opcionConvertida)
+    {
+        Console.WriteLine();
+        Console.WriteLine(
+            "Error: debe ingresar una opción numérica"
+        );
+
+        return;
+    }
+
     string tipoHabitacion ="";
 
     switch (opcionTipo)
