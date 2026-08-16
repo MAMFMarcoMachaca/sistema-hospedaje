@@ -303,6 +303,92 @@ El ingreso no fue registrado.
 
 ---
 
+
+## CP-11 — Intentar registrar una habitación con un número duplicado
+
+**Funcionalidad:** Validación del número de habitación.
+
+**Precondición:**
+
+Debe existir previamente una habitación registrada con el número `101`.
+
+**Datos del primer registro:**
+
+- Número de habitación: `101`.
+- Tipo: `1 - Simple`.
+- Precio: `40`.
+- Estado: `1 - Disponible`.
+
+**Datos del segundo registro:**
+
+- Número de habitación: `101`.
+- Tipo: `2 - Doble`.
+- Precio: `60`.
+- Estado: `2 - Ocupada`.
+
+**Resultado esperado:**
+
+El sistema debe:
+
+1. Detectar que ya existe una habitación con el número `101`.
+2. Mostrar un mensaje de error.
+3. Cancelar inmediatamente el segundo registro.
+4. Mantener una sola habitación registrada con el número `101`.
+
+**Resultado obtenido inicialmente:**
+
+El sistema permitió completar el segundo registro y mostró:
+
+`Habitación 101 | Tipo: Doble | Precio: S/ 60.00 | Estado: Ocupada`
+
+El resumen mostró dos registros con el mismo número:
+
+`Habitaciones registradas: 2`
+
+- `Habitación 101 | Tipo: Simple | Precio: S/ 40.00 | Estado: Disponible`
+- `Habitación 101 | Tipo: Doble | Precio: S/ 60.00 | Estado: Ocupada`
+
+**Reproducibilidad:** 1 de 1 intento.
+
+**Estado inicial:** FALLIDO ❌
+
+**Defecto relacionado:** BUG-02.
+
+### Retest
+
+Después de aplicar la corrección, se ejecutaron dos pruebas de números duplicados.
+
+### Primera prueba
+
+1. Se registró correctamente la habitación `101`.
+2. Se intentó registrar nuevamente la habitación `101`.
+
+El sistema mostró:
+
+`Error: ya existe una habitación registrada con el número 101.`
+
+### Segunda prueba
+
+1. Se registró correctamente la habitación `102`.
+2. Se intentó registrar nuevamente la habitación `102`.
+
+El sistema mostró:
+
+`Error: ya existe una habitación registrada con el número 102.`
+
+En ambos intentos, el sistema canceló inmediatamente el registro y volvió al menú principal sin solicitar tipo, precio ni estado.
+
+El resumen conservó únicamente las dos habitaciones originales:
+
+- Habitación `101`.
+- Habitación `102`.
+
+**Reproducibilidad del retest:** 2 de 2 intentos.
+
+**Resultado del retest:** APROBADO ✅
+
+**Estado del defecto:** CORREGIDO ✅
+
 # Defectos encontrados
 
 ## BUG-01 — El sistema registra habitaciones con precio negativo
@@ -358,21 +444,106 @@ Corregido y verificado mediante retest.
 
 ---
 
+## BUG-02 — El sistema permite registrar habitaciones con números duplicados
+
+**Módulo:** Registro de habitaciones.
+
+**Severidad estimada:** Alta.
+
+**Prioridad recomendada:** Alta.
+
+### Regla de negocio afectada
+
+Cada habitación física debe identificarse mediante un número único.
+
+El modelo SQL también establece esta restricción mediante:
+
+`Numero INT NOT NULL UNIQUE`
+
+### Pasos para reproducir
+
+1. Ejecutar `RegistroHabitacion`.
+2. Seleccionar `1 - Registrar habitación`.
+3. Registrar la habitación `101` como Simple, con precio `40` y estado Disponible.
+4. Volver a seleccionar `1 - Registrar habitación`.
+5. Registrar nuevamente la habitación `101`, esta vez como Doble, con precio `60` y estado Ocupada.
+6. Seleccionar `3 - Ver resumen`.
+7. Observar los registros mostrados.
+
+### Resultado esperado
+
+El sistema debe rechazar el segundo registro porque ya existe una habitación con el número `101`.
+
+### Resultado real inicial
+
+El sistema aceptó ambos registros y mostró dos habitaciones con el mismo número, pero con diferente tipo, precio y estado.
+
+### Impacto
+
+El defecto puede provocar:
+
+- Duplicación de habitaciones.
+- Inconsistencias en el tipo y precio.
+- Estados contradictorios.
+- Errores en disponibilidad.
+- Posibles problemas de sobreventa.
+- Reportes incorrectos.
+
+### Reproducibilidad
+
+`1 de 1 intento`.
+
+### Corrección aplicada
+
+Después de validar que el número ingresado es mayor que cero, se agregó un ciclo `foreach` que revisa las habitaciones almacenadas.
+
+La validación comprueba si alguna habitación comienza con el mismo número:
+
+`Habitación {numeroHabitacion} |`
+
+Si encuentra una coincidencia, muestra un mensaje de error y ejecuta `return` para cancelar el registro.
+
+### Verificación
+
+Se realizaron las siguientes pruebas:
+
+- Se intentó registrar dos veces la habitación `101`.
+- Se intentó registrar dos veces la habitación `102`.
+
+El sistema rechazó correctamente ambos registros duplicados.
+
+No solicitó tipo, precio ni estado después de detectar el número repetido.
+
+### Resultado del retest
+
+APROBADO ✅
+
+### Estado
+
+Corregido y verificado mediante retest.
+
 ## Resumen de ejecución
 
-- Casos diseñados: **10**.
-- Casos ejecutados: **10**.
+- Casos diseñados: **11**.
+- Casos ejecutados: **11**.
 - Casos aprobados inicialmente: **9**.
-- Casos fallidos inicialmente: **1**.
-- Defectos encontrados: **1**.
-- Defectos corregidos: **1**.
-- Retests aprobados: **1**.
-- Estado final: **10 casos validados correctamente**.
+- Casos fallidos inicialmente: **2**.
+- Defectos encontrados: **2**.
+- Defectos corregidos: **2**.
+- Retests aprobados: **2**.
+- Estado final: **11 casos validados correctamente**.
 
 ## Resultado general
 
-Las funciones principales y las validaciones evaluadas funcionan correctamente al finalizar la sesión de pruebas.
+Las funciones y validaciones evaluadas funcionan correctamente al finalizar las sesiones de prueba.
 
-Durante la ejecución inicial se identificó un defecto en la validación del precio de una habitación: el sistema mostraba el mensaje de error correspondiente, pero continuaba el proceso y permitía almacenar un precio negativo.
+Durante las ejecuciones iniciales se identificaron dos defectos:
 
-El defecto fue documentado, corregido y posteriormente verificado mediante un retest satisfactorio.
+1. El sistema mostraba un error al ingresar un precio negativo, pero continuaba el proceso y permitía registrar la habitación.
+2. El sistema permitía registrar varias habitaciones utilizando el mismo número.
+
+Ambos defectos fueron reproducidos, documentados y corregidos.
+
+Las correcciones se verificaron posteriormente mediante retests satisfactorios.
+
+El sistema actualmente rechaza precios menores o iguales a cero y evita el registro de números de habitación duplicados.

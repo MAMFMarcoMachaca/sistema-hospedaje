@@ -198,6 +198,21 @@ void RegistrarHabitacion(List<string> habitaciones)
         return;
     }
 
+    foreach (string habitacion in habitaciones)
+    {
+        if(habitacion.StartsWith(
+            $"Habitación {numeroHabitacion} |"
+        ))
+        {
+            Console.WriteLine();
+            Console.WriteLine(
+                $"Error: ya existe una habitación registrada con el número {numeroHabitacion}."
+            );
+
+            return;
+        }
+    }
+
     Console.WriteLine();
     Console.WriteLine("Seleccione el tipo de habitación:");
     Console.WriteLine("1. Simple");
