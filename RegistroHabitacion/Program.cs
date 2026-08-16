@@ -231,7 +231,7 @@ void RegistrarHabitacion(List<string> habitaciones)
     {
         Console.WriteLine();
         Console.WriteLine(
-            "Error: debe ingresar una opción numérica"
+            "Error: debe ingresar una opción numérica."
         );
 
         return;
@@ -268,16 +268,6 @@ void RegistrarHabitacion(List<string> habitaciones)
             );
 
             return;
-    }
-
-    if (!opcionConvertida)
-    {
-        Console.WriteLine();
-        Console.WriteLine(
-            "Error: debe ingresar una opción numérica."
-        );
-
-        return;
     }
 
     Console.WriteLine();
