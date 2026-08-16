@@ -99,6 +99,7 @@ Durante la prueba, el resumen mostró:
 Habitaciones registradas: 2
 - Habitación 101 | Tipo: Simple | Precio: S/ 40.00 | Estado: Disponible
 - Habitación 101 | Tipo: Doble | Precio: S/ 60.00 | Estado: Ocupada
+```
 
 **Caso de prueba relacionado:** CP-11.
 

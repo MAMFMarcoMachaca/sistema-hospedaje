@@ -303,7 +303,6 @@ El ingreso no fue registrado.
 
 ---
 
-# Defectos encontrados
 
 ## CP-11 — Intentar registrar una habitación con un número duplicado
 
@@ -354,8 +353,6 @@ El resumen mostró dos registros con el mismo número:
 **Estado inicial:** FALLIDO ❌
 
 **Defecto relacionado:** BUG-02.
-
-### Retest
 
 ### Retest
 

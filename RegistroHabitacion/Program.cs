@@ -198,7 +198,7 @@ void RegistrarHabitacion(List<string> habitaciones)
         return;
     }
 
-    foreach(string habitacion in habitaciones)
+    foreach (string habitacion in habitaciones)
     {
         if(habitacion.StartsWith(
             $"Habitación {numeroHabitacion} |"
