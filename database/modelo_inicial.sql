@@ -21,7 +21,7 @@ CREATE TABLE Pagos
 (
     PagoId INT IDENTITY(1,1) PRIMARY KEY,
     ClienteId INT NOT NULL,
-    HabitacionesId INT NULL,
+    HabitacionId INT NULL,
     Concepto NVARCHAR(100) NOT NULL,
     Monto DECIMAL(10,2) NOT NULL CHECK (Monto>0),
     MetodoPago NVARCHAR(30) NOT NULL,
