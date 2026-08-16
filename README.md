@@ -230,6 +230,12 @@ Se practicaron conceptos como:
 - `DECIMAL`
 - `DATETIME`
 
+## Práctica de consultas SQL
+
+Se documentó una primera práctica de consultas aplicadas a habitaciones, pagos y cochera:
+
+- [SQL práctico 1: SELECT, WHERE y ORDER BY](docs/SQL_PRACTICO.md)
+
 > Actualmente este modelo todavía no está conectado a las aplicaciones de consola.
 
 ---
