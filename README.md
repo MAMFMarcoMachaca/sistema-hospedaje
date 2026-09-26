@@ -1,65 +1,45 @@
 # Sistema de Gestión para Hospedaje
 
-Proyecto educativo desarrollado en C# y .NET para construir progresivamente un sistema de gestión aplicado a un hospedaje real.
+Proyecto educativo desarrollado en C# y .NET para construir progresivamente un sistema de gestión aplicado a un hospedaje.
 
-El objetivo es practicar desarrollo backend, bases de datos, QA, soporte de aplicaciones, análisis funcional, Git/GitHub y diseño de APIs utilizando un mismo proyecto como portafolio.
+El proyecto comenzó con aplicaciones de consola para practicar fundamentos de programación y actualmente se encuentra en transición hacia un proyecto backend con programación orientada a objetos, base de datos y posteriormente ASP.NET Core.
 
 ---
 
-## Problema que busca resolver
+## Objetivo
 
-Muchas operaciones de un hospedaje pueden terminar registrándose en cuadernos, hojas separadas o mensajes, dificultando el control de:
+Construir progresivamente un sistema que permita manejar información relacionada con:
 
 - Habitaciones.
 - Clientes.
-- Ingresos.
-- Pagos.
+- Ingresos y pagos.
 - Cochera.
 - Gastos.
 - Ocupación.
 - Historial de operaciones.
 
-El proyecto busca centralizar progresivamente esta información en un sistema organizado.
+Además del desarrollo, el repositorio se utiliza para practicar Git/GitHub, SQL, QA, documentación técnica, análisis de incidencias y diseño de APIs.
 
 ---
 
-# Estado actual
+# Estado técnico actual
 
-Actualmente el repositorio contiene:
+**Última auditoría del repositorio:** 25/09/2026.
 
-- Dos aplicaciones de consola desarrolladas en C#.
-- Registro temporal de habitaciones.
-- Registro temporal de ingresos.
-- Validaciones de datos mediante `TryParse()`.
-- Métodos separados para organizar la lógica.
-- Cálculo de ingresos y utilidad diaria.
-- Modelo SQL inicial.
-- Documentación de QA manual.
-- 10 casos de prueba funcionales.
-- Registro y seguimiento de una incidencia real.
-- Plantilla de incidencias para soporte de aplicaciones.
-- Diseño conceptual de una futura API REST.
-- Pruebas conceptuales para Postman.
+Actualmente existen dos aplicaciones de consola independientes desarrolladas en C# con `.NET 10`.
 
-> La base de datos y la API todavía no están conectadas al programa. Actualmente forman parte del diseño y preparación para las siguientes etapas.
+## Implementado
 
----
+### IngresoDiarioHospedaje
 
-# Funcionalidad implementada
+Permite ingresar:
 
-## 1. Ingreso Diario del Hospedaje
-
-Aplicación de consola que permite registrar:
-
-- Cantidad de habitaciones simples.
-- Precio de habitaciones simples.
-- Cantidad de habitaciones dobles.
-- Precio de habitaciones dobles.
-- Cantidad de cocheras.
-- Precio de cochera.
+- Cantidad y precio de habitaciones simples.
+- Cantidad y precio de habitaciones dobles.
+- Cantidad y precio de cocheras.
 - Gastos diarios.
 
-El programa calcula:
+Calcula:
 
 - Ingreso por habitaciones.
 - Ingreso por cochera.
@@ -67,148 +47,99 @@ El programa calcula:
 - Gastos.
 - Utilidad estimada.
 
----
+Este módulo todavía utiliza `int.Parse()` y `decimal.Parse()`, por lo que una entrada con formato incorrecto puede producir una excepción.
 
-## 2. Registro de Habitaciones e Ingresos
+### RegistroHabitacion
 
-Aplicación de consola con menú principal:
+Incluye un menú que permite:
 
-1. Registrar habitación.
-2. Registrar ingreso.
-3. Ver resumen.
+1. Registrar una habitación.
+2. Registrar un ingreso.
+3. Mostrar un resumen.
 4. Salir.
 
-### Registro de habitación
-
-Permite ingresar:
-
-- Número.
-- Tipo.
-- Precio por noche.
-- Estado.
-
-Tipos disponibles:
-
-- Simple.
-- Doble.
-- Matrimonial.
-- Familiar.
-- Triple.
-
-Estados:
-
-- Disponible.
-- Ocupada.
-
-### Registro de ingresos
-
-Permite registrar:
-
-- Concepto.
-- Monto.
-
-El sistema mantiene un monto acumulado durante la ejecución.
-
----
-
-# Validaciones implementadas
-
-Actualmente se validan, entre otros casos:
+Actualmente valida:
 
 - Opciones no numéricas.
-- Opciones fuera del rango permitido.
-- Números de habitación menores o iguales a cero.
-- Precios no numéricos.
-- Precios menores o iguales a cero.
-- Conceptos de ingreso vacíos.
-- Montos de ingreso inválidos.
+- Opciones fuera de rango.
+- Número de habitación inválido.
+- Número de habitación menor o igual a cero.
+- Habitaciones duplicadas.
+- Tipo de habitación inválido.
+- Precio no numérico.
+- Precio menor o igual a cero.
+- Estado inválido.
+- Concepto de ingreso vacío.
+- Monto de ingreso inválido o menor o igual a cero.
 
-Se utiliza principalmente:
+Este módulo utiliza principalmente `TryParse()` para controlar entradas incorrectas.
+
+---
+
+# Limitación principal actual
+
+Los datos se almacenan únicamente en memoria utilizando estructuras como:
 
 ```csharp
-int.TryParse(...)
-decimal.TryParse(...)
+List<string> habitaciones
+List<string> ingresos
 ```
 
-para evitar que entradas incorrectas interrumpan inesperadamente el programa.
+Por ello:
+
+- La información desaparece al cerrar el programa.
+- Las habitaciones todavía no están representadas mediante objetos.
+- No existe persistencia en SQL.
+- Los dos programas de consola no comparten información.
+
+La siguiente etapa del proyecto consiste en comenzar la transición desde estructuras basadas en texto hacia programación orientada a objetos.
 
 ---
 
-# Organización del código
+# QA y defectos corregidos
 
-Parte de la lógica del módulo `RegistroHabitacion` fue separada en métodos:
+El repositorio contiene **11 casos de prueba funcionales documentados**.
 
-```text
-RegistrarHabitacion()
-RegistrarIngreso()
-MostrarResumen()
-```
+Durante las pruebas se identificaron dos defectos:
 
-Esto permite mantener el programa principal más organizado y facilita futuras mejoras.
+### BUG-01 / INC-001 — Precio negativo
 
----
+El sistema mostraba el error correspondiente pero continuaba el registro de la habitación.
 
-# QA y pruebas
+La corrección agregó la finalización del método mediante `return`.
 
-El proyecto incluye documentación de pruebas funcionales manuales.
+**Estado:** corregido y retesteado.
 
-Se diseñaron y ejecutaron:
+### BUG-02 / INC-002 — Habitación duplicada
 
-- **10 casos de prueba.**
-- **9 casos aprobados inicialmente.**
-- **1 caso fallido inicialmente.**
-- **1 defecto encontrado.**
-- **1 defecto corregido.**
-- **1 retest aprobado.**
+El sistema permitía registrar más de una habitación utilizando el mismo número.
 
-Durante las pruebas se encontró que el sistema podía continuar el registro de una habitación después de detectar un precio negativo.
+Se agregó una validación para detectar números ya registrados.
 
-El defecto fue documentado, corregido y verificado nuevamente mediante un retest.
+**Estado:** corregido y retesteado.
 
-Documentación relacionada:
+Documentación:
 
 ```text
 docs/CASOS_DE_PRUEBA.md
 docs/CHECKLIST_PRUEBAS.md
 docs/ERRORES_Y_PENDIENTES.md
-```
-
----
-
-# Soporte de aplicaciones
-
-También se documentó un flujo básico de gestión de incidencias.
-
-El repositorio incluye:
-
-```text
-docs/PLANTILLA_INCIDENCIA.md
 docs/INC-001_PRECIO_NEGATIVO.md
+docs/INC-002_HABITACION_DUPLICADA.md
+docs/PLANTILLA_INCIDENCIA.md
 ```
-
-La incidencia `INC-001` documenta:
-
-- Problema reportado.
-- Comportamiento esperado.
-- Comportamiento obtenido.
-- Pasos para reproducir.
-- Impacto.
-- Análisis.
-- Solución aplicada.
-- Retest.
-- Cierre.
 
 ---
 
-# Modelo SQL inicial
+# Base de datos
 
-Se creó un modelo conceptual inicial en:
+Existe un modelo SQL inicial en:
 
 ```text
 database/modelo_inicial.sql
 ```
 
-Incluye las tablas:
+Actualmente define:
 
 - `Habitaciones`
 - `Clientes`
@@ -216,35 +147,43 @@ Incluye las tablas:
 - `Cochera`
 - `Gastos`
 
-Se practicaron conceptos como:
+El modelo utiliza conceptos como:
 
-- `PRIMARY KEY`
-- `FOREIGN KEY`
-- `IDENTITY`
-- `NOT NULL`
-- `NULL`
-- `UNIQUE`
-- `CHECK`
-- `INT`
-- `NVARCHAR`
-- `DECIMAL`
-- `DATETIME`
+```text
+PRIMARY KEY
+FOREIGN KEY
+IDENTITY
+UNIQUE
+NOT NULL
+CHECK
+DECIMAL
+NVARCHAR
+DATETIME
+```
 
-## Práctica de consultas SQL
+También existe práctica SQL en:
 
-Se documentó una primera práctica de consultas aplicadas a habitaciones, pagos y cochera:
+```text
+docs/SQL_PRACTICO.md
+```
 
-- [SQL práctico 1: SELECT, WHERE y ORDER BY](docs/SQL_PRACTICO.md)
+## Estado
 
-> Actualmente este modelo todavía no está conectado a las aplicaciones de consola.
+El modelo SQL está diseñado, pero todavía **no está conectado a las aplicaciones C#**.
+
+No existe todavía Entity Framework Core ni persistencia real.
 
 ---
 
-# API REST futura
+# API REST
 
-Se diseñaron conceptualmente endpoints para una futura API.
+Existe un diseño conceptual en:
 
-Ejemplos:
+```text
+docs/API_FUTURA.md
+```
+
+Se han propuesto endpoints como:
 
 ```http
 GET /api/habitaciones
@@ -253,84 +192,38 @@ PUT /api/habitaciones/{id}
 DELETE /api/habitaciones/{id}
 ```
 
-También se propusieron endpoints para:
+También existen propuestas para clientes, pagos, cochera y reportes.
 
-- Clientes.
-- Pagos.
-- Cochera.
-- Reportes.
+## Estado
 
-La documentación se encuentra en:
+La API REST todavía **no está implementada**.
 
-```text
-docs/API_FUTURA.md
-```
-
-La API todavía no está implementada.
+Actualmente no existe un proyecto ASP.NET Core Web API.
 
 ---
 
-# Postman conceptual
+# Postman
 
-Se prepararon casos conceptuales para futuras pruebas de la API mediante Postman.
-
-Ejemplos trabajados:
-
-```text
-GET  /api/habitaciones
-→ 200 OK
-```
-
-```text
-POST /api/habitaciones
-→ 201 Created
-```
-
-```text
-POST /api/habitaciones
-precio negativo
-→ 400 Bad Request
-```
-
-También se introdujeron conceptos básicos de:
-
-- HTTP.
-- GET.
-- POST.
-- Body.
-- JSON.
-- Códigos de estado HTTP.
-
-Documentación:
+Existe documentación conceptual en:
 
 ```text
 docs/POSTMAN_CONCEPTUAL.md
 ```
 
----
+Se han trabajado conceptos de:
 
-# Tecnologías utilizadas actualmente
-
-- C#
-- .NET
-- Visual Studio Code
-- Git
-- GitHub
-- Markdown
-
----
-
-# Tecnologías y conceptos en preparación
-
-- SQL.
-- Bases de datos relacionales.
-- API REST.
-- HTTP.
+- GET.
+- POST.
 - JSON.
-- Postman.
-- ASP.NET Core.
+- Body.
+- HTTP.
+- 200 OK.
+- 201 Created.
+- 400 Bad Request.
 
-SQL, API REST y Postman se encuentran actualmente en una etapa conceptual o de diseño y todavía no forman parte de una integración funcional completa.
+## Estado
+
+Las pruebas son conceptuales porque todavía no existe una API funcional que pueda ejecutarse desde Postman.
 
 ---
 
@@ -356,8 +249,11 @@ sistema-hospedaje/
 │   ├── CHECKLIST_PRUEBAS.md
 │   ├── ERRORES_Y_PENDIENTES.md
 │   ├── INC-001_PRECIO_NEGATIVO.md
+│   ├── INC-002_HABITACION_DUPLICADA.md
 │   ├── PLANTILLA_INCIDENCIA.md
-│   └── POSTMAN_CONCEPTUAL.md
+│   ├── POSTMAN_CONCEPTUAL.md
+│   ├── REQUISITOS_VACANTES.md
+│   └── SQL_PRACTICO.md
 │
 ├── .gitignore
 └── README.md
@@ -365,148 +261,194 @@ sistema-hospedaje/
 
 ---
 
-# Ejecución
+# Cómo compilar
 
-## Ingreso Diario
+Los dos proyectos utilizan:
+
+```xml
+<TargetFramework>net10.0</TargetFramework>
+```
+
+Por ello se necesita un SDK compatible con .NET 10.
 
 Desde la raíz del repositorio:
 
 ```bash
-dotnet run --project .\IngresoDiarioHospedaje\IngresoDiarioHospedaje.csproj
+dotnet build ./IngresoDiarioHospedaje/IngresoDiarioHospedaje.csproj
+dotnet build ./RegistroHabitacion/RegistroHabitacion.csproj
 ```
 
-## Registro de Habitaciones
+Actualmente no existe una solución `.sln` en la raíz.
+
+---
+
+# Cómo ejecutar
+
+## Ingreso diario
 
 ```bash
-dotnet run --project .\RegistroHabitacion\RegistroHabitacion.csproj
+dotnet run --project ./IngresoDiarioHospedaje/IngresoDiarioHospedaje.csproj
 ```
 
-Para comprobar la compilación:
+## Registro de habitaciones
 
 ```bash
-dotnet build
+dotnet run --project ./RegistroHabitacion/RegistroHabitacion.csproj
 ```
 
 ---
 
-# Conceptos practicados
+# Deuda técnica identificada
 
-## C#
+La auditoría del 25/09/2026 identificó como principales pendientes:
 
-- Variables.
-- `int`.
-- `decimal`.
-- Strings.
-- Condicionales.
-- `if` / `else`.
-- `switch`.
-- `while`.
-- `List<string>`.
-- `Add()`.
-- `Count`.
-- `foreach`.
-- Métodos.
-- Parámetros.
-- `return`.
-- `TryParse()`.
-- Interpolación de cadenas.
-
-## Git y GitHub
-
-- Repositorios.
-- Branches.
-- `git status`.
-- `git add`.
-- `git commit`.
-- `git push`.
-- `git pull`.
-- Pull Requests.
-- Merge.
-
-## QA
-
-- Casos de prueba.
-- Resultado esperado.
-- Resultado obtenido.
-- Pruebas positivas.
-- Pruebas negativas.
-- Defectos.
-- Reproducibilidad.
-- Retest.
-
-## Soporte de aplicaciones
-
-- Incidencias.
-- Severidad.
-- Prioridad.
-- Impacto.
-- Análisis inicial.
-- Workaround.
-- Escalamiento.
-- Resolución.
-- Cierre.
+| Prioridad | Deuda |
+|---|---|
+| Alta | Reemplazar `List<string>` por modelos de dominio |
+| Alta | Crear la clase `Habitacion` |
+| Alta | Separar reglas de negocio de la interacción por consola |
+| Alta | Fortalecer validaciones de `IngresoDiarioHospedaje` |
+| Alta | Ejecutar y conectar una base de datos real |
+| Alta | Implementar persistencia |
+| Media | Crear solución `.sln` |
+| Media | Crear pruebas automatizadas |
+| Media | Implementar Entity Framework Core |
+| Media | Implementar ASP.NET Core Web API |
+| Media | Ejecutar pruebas reales con Postman |
+| Media | Agregar manejo estructurado de errores |
+| Media | Incorporar `async/await` cuando exista acceso a datos |
+| Baja | Agregar integración continua con GitHub Actions |
 
 ---
 
-# Etapas del proyecto
+# Roadmap backend
 
-1. ✅ Fundamentos de C#.
-2. ✅ Cálculo de ingresos diarios.
-3. ✅ Menú de consola.
-4. ✅ Registro temporal de habitaciones.
-5. ✅ Registro temporal de ingresos.
-6. ✅ Mejora de validaciones.
-7. ✅ Separación básica de lógica mediante métodos.
-8. ✅ QA manual y casos de prueba.
-9. ✅ Documentación de incidencias.
-10. ✅ Modelo SQL inicial.
-11. ✅ Diseño conceptual de API REST y Postman.
-12. ⏳ Registro de clientes.
-13. ⏳ Persistencia real en base de datos.
-14. ⏳ ASP.NET Core.
-15. ⏳ API REST funcional.
-16. ⏳ Pruebas reales con Postman.
-17. ⏳ Reportes.
-18. ⏳ Interfaz de usuario.
+La transición se realizará progresivamente.
+
+### Etapa 1 — Programación orientada a objetos
+
+Crear modelos de dominio comenzando con:
+
+```text
+Habitacion
+```
+
+y posteriormente:
+
+```text
+Cliente
+Pago
+Cochera
+Gasto
+```
+
+El primer refactor será sustituir:
+
+```csharp
+List<string> habitaciones
+```
+
+por:
+
+```csharp
+List<Habitacion> habitaciones
+```
+
+sin cambiar todavía el comportamiento funcional existente.
+
+### Etapa 2 — Separación de responsabilidades
+
+Separar progresivamente:
+
+```text
+Models
+Services
+Program.cs
+```
+
+### Etapa 3 — Base de datos real
+
+Ejecutar el modelo SQL y practicar operaciones reales:
+
+```text
+SELECT
+INSERT
+UPDATE
+DELETE
+JOIN
+COUNT
+SUM
+GROUP BY
+```
+
+### Etapa 4 — Entity Framework Core
+
+Conectar C# con SQL mediante:
+
+```text
+DbContext
+DbSet
+LINQ
+Migrations
+SaveChangesAsync
+```
+
+### Etapa 5 — ASP.NET Core Web API
+
+Implementar los endpoints actualmente documentados de forma conceptual.
+
+### Etapa 6 — Pruebas reales
+
+Ejecutar la API mediante Postman y posteriormente incorporar pruebas automatizadas.
 
 ---
 
-# Sprint 06–14 de agosto de 2026
+# Próxima implementación
 
-## Trabajo realizado
+El siguiente cambio de código será pequeño y controlado:
 
-- [x] Revisar y ejecutar los proyectos existentes.
-- [x] Compilar ambos proyectos.
-- [x] Probar entradas válidas e inválidas.
-- [x] Mejorar validaciones.
-- [x] Separar lógica en métodos.
-- [x] Crear checklist de pruebas.
-- [x] Diseñar y ejecutar 10 casos de prueba.
-- [x] Detectar y documentar un defecto.
-- [x] Corregir el defecto.
-- [x] Realizar un retest.
-- [x] Crear plantilla de incidencia.
-- [x] Documentar una incidencia real.
-- [x] Crear modelo SQL inicial.
-- [x] Diseñar endpoints futuros.
-- [x] Documentar pruebas conceptuales de Postman.
+```text
+RegistroHabitacion/
+│
+├── Models/
+│   └── Habitacion.cs
+│
+├── Program.cs
+└── RegistroHabitacion.csproj
+```
 
-## Resultado del sprint
+Objetivo:
 
-El proyecto pasó de contener únicamente ejercicios de consola a incorporar prácticas básicas de desarrollo, QA, soporte de aplicaciones, diseño de base de datos y arquitectura backend.
+Convertir el almacenamiento actual de habitaciones desde texto hacia objetos sin perder las validaciones y comportamientos que ya funcionan.
 
-La siguiente etapa continuará desarrollando funcionalidades progresivamente sin perder el enfoque en comprensión, pruebas y documentación.
+Antes y después del refactor se deberán repetir los casos funcionales existentes para comprobar que no se introdujeron regresiones.
 
 ---
 
-# Limitaciones actuales
+# Tecnologías actuales
 
-- Los datos de las aplicaciones de consola son temporales.
-- Los datos desaparecen al cerrar el programa.
-- La base de datos todavía no está conectada al código C#.
-- La API REST todavía no está implementada.
-- Los casos de Postman son conceptuales.
-- Todavía no existe una interfaz gráfica.
+```text
+C#
+.NET 10
+Git
+GitHub
+SQL (diseño y práctica)
+Markdown
+QA manual
+```
+
+# Tecnologías siguientes
+
+```text
+Programación orientada a objetos
+SQL Server
+Entity Framework Core
+ASP.NET Core
+REST
+JSON
+Postman
+Pruebas automatizadas
+```
 
 ---
 
