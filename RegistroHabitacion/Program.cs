@@ -1,4 +1,6 @@
-﻿List<string> habitaciones = new List<string>();
+﻿using RegistroHabitacion.Models;
+
+List<Habitacion> habitaciones = new List<Habitacion>();
 List<string> ingresos = new List<string>();
 
 decimal totalIngresos = 0m;
@@ -56,7 +58,7 @@ while (programaActivo)
 
 
 void MostrarResumen(
-    List<string> habitaciones,
+    List<Habitacion> habitaciones,
     List<string> ingresos,
     decimal totalIngresos
 )
@@ -76,9 +78,14 @@ void MostrarResumen(
         );
     }
     else{
-        foreach (string habitacion in habitaciones)
+        foreach (Habitacion habitacion in habitaciones)
         {
-            Console.WriteLine($"- {habitacion}");
+            Console.WriteLine(
+                $"- Habitación {habitacion.Numero} | " +
+                $"Tipo: {habitacion.Tipo} | " +
+                $"Precio: S/ {habitacion.PrecioNoche:F2} | " +
+                $"Estado: {habitacion.Estado}"
+            );
         }
     }
 
@@ -165,7 +172,7 @@ decimal RegistrarIngreso(
     return totalIngresos;
 }
 
-void RegistrarHabitacion(List<string> habitaciones)
+void RegistrarHabitacion(List<Habitacion> habitaciones)
 {
     Console.WriteLine();
     Console.WriteLine("=== REGISTRO DE HABITACIÓN ===");
@@ -198,11 +205,9 @@ void RegistrarHabitacion(List<string> habitaciones)
         return;
     }
 
-    foreach (string habitacion in habitaciones)
+    foreach (Habitacion habitacion in habitaciones)
     {
-        if(habitacion.StartsWith(
-            $"Habitación {numeroHabitacion} |"
-        ))
+        if(habitacion.Numero == numeroHabitacion)
         {
             Console.WriteLine();
             Console.WriteLine(
@@ -340,17 +345,25 @@ void RegistrarHabitacion(List<string> habitaciones)
             return;
     }
 
-    string habitacionRegistrada =
-        $"Habitación {numeroHabitacion} | " +
-        $"Tipo: {tipoHabitacion} | " +
-        $"Precio: S/ {precioNoche:F2} | " +
-        $"Estado: {estadoHabitacion}";
+    Habitacion habitacionRegistrada = new Habitacion
+    {
+        Numero = numeroHabitacion,
+        Tipo = tipoHabitacion,
+        PrecioNoche = precioNoche,
+        Estado = estadoHabitacion
+    };
 
     habitaciones.Add(habitacionRegistrada);
 
     Console.WriteLine();
     Console.WriteLine("=== HABITACIÓN REGISTRADA ===");
-    Console.WriteLine(habitacionRegistrada);
+    Console.WriteLine(
+        $"Habitación {habitacionRegistrada.Numero} | " +
+        $"Tipo: {habitacionRegistrada.Tipo} | " +
+        $"Precio: S/ {habitacionRegistrada.PrecioNoche:F2} | " +
+        $"Estado: {habitacionRegistrada.Estado}"
+    );
+
     Console.WriteLine(
         $"Total registrado: {habitaciones.Count}"
     );
