@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SistemaHospedaje.Api/SistemaHospedaje.Api.csproj" />
+  </Folder>
+  <Project Path="IngresoDiarioHospedaje/IngresoDiarioHospedaje.csproj" />
+  <Project Path="RegistroHabitacion/RegistroHabitacion.csproj" />
+</Solution>
